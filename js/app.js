@@ -24,11 +24,18 @@ var Cat = function() {
 }
 
 var ViewModel = function() {
+    //Forces the context to stay within the viewmodel
+    var that = this;
 
     this.currentCat = ko.observable(new Cat());
 
+
     this.incrementCounter = function() {
-        this.currentCat().clickCount(this.currentCat().clickCount() + 1);
+        //The 'with' keyword in the DOM is placing this in the currentCat binding
+        //context. Could have simply used 'this' here instead of 'that.currentCat'
+        //but the latter helps with maintainability in showing that the currentCat
+        //is being referenced.
+        that.currentCat().clickCount(that.currentCat().clickCount() + 1);
     };
 }
 

@@ -6,18 +6,26 @@
 </head>
 <body>
     <ul id="cat-list"></ul>
-    <div id="cat">
 
-        <h2 data-bind='text: currentCat().name'></h2>
+    <!--The 'with' keyword places the data-bind of all elements within the bound element into the
+        specified context (in this case currentCat) which now allows binding as name instead of
+        currentCat().name. This can introduce some confusion as it places everything in the specified
+        context. See img below for an example-->
+    <div data-bind='with:currentCat'>
 
-        <p><strong data-bind='text: currentCat().level'>Newborn</strong></p>
+        <h2 data-bind='text: name'></h2>
 
-        <div data-bind='text: currentCat().clickCount'></div>
-        <img src="" alt="cute cat" data-bind='click: incrementCounter, attr: {src: currentCat().imgSrc}'>
+        <p><strong data-bind='text: level'>Newborn</strong></p>
+
+        <div data-bind='text: clickCount'></div>
+        <!--Previously when calling incrementCounter, the call was from the viewmodel binding. But now
+            because of the use of the 'with' keyword above this element's context is currentCat, so must
+            use the $parent attribute to return context to viewmodel-->
+        <img src="" alt="cute cat" data-bind='click: $parent.incrementCounter, attr: {src: imgSrc}'>
 
         <div>
             <h3>Nicknames: </h3>
-            <ul data-bind='foreach: currentCat().nicks'>
+            <ul data-bind='foreach: nicks'>
                 <li>
                     <span data-bind='text: nick'></span>
                 </li>
