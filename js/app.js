@@ -16,6 +16,12 @@ var ViewModel = function() {
         }
     }, this);
 
+    this.nicks = ko.observableArray([
+        {nick: 'tabtab'},
+        {nick: 't-muffin'},
+        {nick: 'tabariffic'}
+    ]);
+
     this.incrementCounter = function() {
         this.clickCount(this.clickCount() + 1);
     };
