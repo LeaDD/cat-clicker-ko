@@ -5,10 +5,8 @@
     <title>Cat Clicker</title>
 </head>
 <body>
-    <!--The 'with' keyword places the data-bind of all elements within the bound element into the
-        specified context (in this case currentCat) which now allows binding as name instead of
-        currentCat().name. This can introduce some confusion as it places everything in the specified
-        context. See img below for an example-->
+    <!--This div will display a list of cats in the catList observable array and re-render the cat information
+        based on the li clicked-->
     <div>
         <h3>CATS</h3>
         <ul data-bind='foreach: catList'>
@@ -18,6 +16,10 @@
         </ul>
     </div>
 
+    <!--The 'with' keyword places the data-bind of all elements within the bound element into the
+        specified context (in this case currentCat) which now allows binding as name instead of
+        currentCat().name. This can introduce some confusion as it places everything in the specified
+        context. See img below for an example-->
     <div data-bind='with:currentCat'>
 
         <h2 data-bind='text: name'></h2>

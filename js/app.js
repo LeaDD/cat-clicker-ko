@@ -1,3 +1,4 @@
+//Our cats
 var initialCats = [
     {
         clickCount : 0,
@@ -36,6 +37,7 @@ var initialCats = [
     }
 ];
 
+//OOP function that allows us to build multiple cats easily from the same prototype
 var Cat = function(data) {
     this.clickCount = ko.observable(data.clickCount);
     this.name = ko.observable(data.name);
@@ -61,14 +63,20 @@ var ViewModel = function() {
     //Forces the context to stay within the viewmodel
     var that = this;
 
+    //This will hold the objects from the 'initialCats' array. The observable array will automatically
+    //udate any bound DOM elements whenever the array changes.
     this.catList = ko.observableArray([]);
 
+    //Push the initialCat objects to the observable array.
     initialCats.forEach(function(catItem) {
         that.catList.push(new Cat(catItem));
     });
 
+    //This will hold the currently selected cat.
     this.currentCat = ko.observable(this.catList()[0]);
 
+    //This will be the click functionality for the cat elements displayed in the DOM. It will
+    //update the current cat to be whichever cat was clicked.
     this.setCat = function(clickedCat) {
         //alert(index);
         that.currentCat(clickedCat);
